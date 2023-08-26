@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { useState } from "react"
+import SessionCheck from '@/pages/components/sessionCheck';
 
 
 function CreateDeliveryman() {
@@ -27,6 +28,7 @@ function CreateDeliveryman() {
     return (
         <>
 
+            <SessionCheck/>
             <section className="flex flex-col md:flex-row h-screen items-center text-center justify-evenly bg-gradient-to-b from-zinc-50 to-blue-100 gap-5">
                 <div>
                     <img className='' src='/deliverman.png' alt="Deliveryman" />

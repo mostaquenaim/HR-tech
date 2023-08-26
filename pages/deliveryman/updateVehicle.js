@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import SessionCheck from '../components/sessionCheck';
 
-export default function deliveryman( ) {
+export default function deliveryman() {
     const {
         register,
         handleSubmit,
@@ -52,37 +52,38 @@ export default function deliveryman( ) {
 
     const handleModelClick = (userId) => {
         router.push(`/deliveryman/updateVehicle/${userId}`);
-      };
+    };
 
 
     return (
         <>
-          <section>
-      <div>
-        <div>
-          <h1>Vehicles</h1>
-          <div></div>
-        </div>
-        <p></p>
-      </div>
-      <div>
-        {users.map((user) => (
-          <div key={user.id}>
-            <div>
-              {console.log(user.image)}
-              <div></div>
-              <h3>Model</h3>
-              <h2
-                style={{ cursor: 'pointer' }}
-                onClick={() => handleModelClick(user.id)}
-              >
-                {user.model}
-              </h2>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+            <SessionCheck />
+            <section className="bg-gradient-to-b from-zinc-50 to-blue-100 min-h-screen flex justify-center items-center">
+                <div className="container mx-auto bg-white shadow-md hover:shadow-lg hover:shadow-black p-6 rounded-lg">
+                    <div className="text-center mb-4">
+                        <h1 className="font-bold text-xl">Vehicles</h1>
+                    </div>
+                    <div>
+                        {users.map((user) => (
+                            <div key={user.id} className="mb-4">
+                                <div className="border p-4 rounded hover:bg-gray-200 cursor-pointer">
+                                    {console.log(user.image)}
+                                    <div className="mb-2">
+                                        <h3 className="font-semibold">Model</h3>
+                                        <h2
+                                            className="text-blue-500 hover:underline cursor-pointer"
+                                            onClick={() => handleModelClick(user.id)}
+                                        >
+                                            {user.model}
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
 
 
 

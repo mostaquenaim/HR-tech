@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router';
+import LoggedCheck from '../components/loggedCheck';
 
 
 export default function DeliverymanSignIn() {
@@ -38,6 +39,7 @@ export default function DeliverymanSignIn() {
     return (
         <>
 
+            <LoggedCheck/>
             <section className="flex h-screen items-center justify-center text-center bg-gradient-to-b from-zinc-50 to-blue-100">
                 <div className='bg-white p-5 shadow-lg rounded-lg hover:shadow-2xl hover:shadow-black max-w-md w-full flex items-center justify-center text-center space-y-4'>
 

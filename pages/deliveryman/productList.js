@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
+import SessionCheck from '@/pages/components/sessionCheck';
 
 function Products({ products }) {
     return (
         <>
+        <SessionCheck/>
             {console.log(products)}
             <section className="text-gray-600 body-font">
                 <div className="container px-5 py-24 mx-auto bg-gradient-to-b from-zinc-50 to-blue-100">

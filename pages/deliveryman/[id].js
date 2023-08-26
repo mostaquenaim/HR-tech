@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import SessionCheck from '@/pages/components/sessionCheck';
 
 const DeliverymanProfile = ({ user }) => {
     const [updatedData, setUpdatedData] = useState({});
@@ -26,6 +27,7 @@ const DeliverymanProfile = ({ user }) => {
 
     return (
         <>
+        <SessionCheck/>
            <div className="flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
     <div className="p-5 bg-white shadow-md shadow-black w-96 flex flex-col gap-3 rounded-lg">
         <h1 className="text-xl font-bold">Update User</h1>

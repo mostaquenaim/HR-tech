@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import SessionCheck from '@/pages/components/sessionCheck';
 
 const UpdateVehicle = ({ vehicle }) => {
 
@@ -32,7 +33,7 @@ const UpdateVehicle = ({ vehicle }) => {
         }
     };
 
-    
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -41,54 +42,56 @@ const UpdateVehicle = ({ vehicle }) => {
 
     return (
         <>
-            <div>
-                <div>
-                    <h1>Update Vehicle</h1>
-                    <p>{success}</p>
-                </div>
-                <div>
-                    <div>
-                        <label>Company:</label>
+            <SessionCheck />
+            <div className="flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
+                <div className="p-5 bg-white shadow-md w-96 flex flex-col gap-3 rounded-lg">
+                    <h1 className="text-xl font-bold">Update Vehicle</h1>
+                    <p className="text-red-500">{success}</p>
+                    <div className="my-2">
+                        <label className="block font-semibold">Company:</label>
                         <input
                             type="text"
                             name="company"
                             value={updatedData.company || vehicle.company}
                             onChange={handleInputChange}
+                            className="border p-1 rounded focus:outline-none focus:border-blue-500"
                         />
                     </div>
-                    <div>
-                        <label>Model:</label>
+                    <div className="my-2">
+                        <label className="block font-semibold">Model:</label>
                         <input
                             type="text"
                             name="model"
                             value={updatedData.model || vehicle.model}
                             onChange={handleInputChange}
+                            className="border p-1 rounded focus:outline-none focus:border-blue-500"
                         />
                     </div>
-                    <div>
-                        <label>Year:</label>
+                    <div className="my-2">
+                        <label className="block font-semibold">Year:</label>
                         <input
                             type="number"
                             name="year"
                             value={updatedData.year || vehicle.year}
                             onChange={handleInputChange}
+                            className="border p-1 rounded focus:outline-none focus:border-blue-500"
                         />
                     </div>
                     <button
                         onClick={handleUpdate}
-                        className="btn bg-blue-400 text-black hover:text-white"
+                        className="btn bg-blue-400 text-black hover:text-white hover:bg-blue-600 transition duration-300"
                     >
                         Update
                     </button>
-
                     <button
                         onClick={handleDelete}
-                        className="btn btn-outline btn-error"
+                        className="btn btn-outline btn-error hover:text-red-600 transition duration-300"
                     >
                         Delete
                     </button>
-                </div >
-            </div >
+                </div>
+            </div>
+
 
 
         </>

@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import SessionCheck from '@/pages/components/sessionCheck';
 
 function CompanyDetails({ details }) {
     return (
         <>
+        <SessionCheck/>
         <div className="container px-5 py-24 mx-auto flex flex-col gap-4 items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
             <h1 className="font-semibold mb-6 text-5xl">Company </h1>
             <ul className="grid gap-5">
