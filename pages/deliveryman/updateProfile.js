@@ -1,22 +1,39 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import SessionCheck from '../components/sessionCheck';
 
-const DeliverymanProfile = ( ) => {
+const DeliverymanProfile = () => {
 
-    const [user, setUser] = useState({});
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    useEffect(() => {
-        if (typeof sessionStorage !== 'undefined') {
-        const session = sessionStorage.getItem('email');
-        console.log(session)
-        if (!user) {
-          router.push('/Admin');
-        }
-        setUser(session)
-    }
+    const [user, setUser] = useState({
+        username: "",
+        firstName: "",
+        email: "",
+        password:"",
+        lastName: "",
+      });
+      const [email, setEmail] =useState("")
+   
+      useEffect(() => {
+        loadUser();
       }, []);
-    
+
+    const loadUser = async () => {
+        const UserEmail=sessionStorage.getItem('email')
+        setEmail(UserEmail)
+
+        const result = await axios.get('http://localhost:3000/users/findUserByEmail', email);
+
+        setUser(result.data);
+      };
+      
     const [updatedData, setUpdatedData] = useState({});
     const router = useRouter();
 
@@ -40,6 +57,7 @@ const DeliverymanProfile = ( ) => {
 
     return (
         <>
+        <SessionCheck/>
            <div className="flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
     <div className="p-5 bg-white shadow-md shadow-black w-96 flex flex-col gap-3 rounded-lg">
         <h1 className="text-xl font-bold">Update User</h1>
@@ -89,7 +107,7 @@ const DeliverymanProfile = ( ) => {
             <input
                 type="email"
                 name="email"
-                value={updatedData.email || user.email}
+                value={user.email}
                 onChange={handleInputChange}
                 className="border p-1 rounded focus:outline-none focus:border-blue-500"
             />
@@ -100,6 +118,7 @@ const DeliverymanProfile = ( ) => {
         >
             Update
         </button>
+
     </div>
 </div>
 
@@ -112,14 +131,3 @@ export default DeliverymanProfile;
 
 // Rest of the code remains the same
 
-
-// export async function getServerSideProps() {
-
-
-
-
-//     const response = await axios.get('http://localhost:3000/users/' + session.id);
-//     const user = await response.data;
-
-//     return { props: { user } }
-// }

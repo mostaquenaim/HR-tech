@@ -2,12 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Drawer from '../components/drawer'
-import SessionCheck from '../components/sessionCheck';
 
-function CustomerReviews({ customerReviews }) {
+function CustomerOrder({  }) {
     return (
         <>
-        <SessionCheck />
         <Drawer title="Customer Review" />
         <div className="container px-5 py-24 mx-auto flex flex-col gap-4 items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
             <h1 className="text-3xl font-semibold mb-6">Customer Reviews</h1>
@@ -23,7 +21,7 @@ function CustomerReviews({ customerReviews }) {
     );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     try {
         const response = await axios.get('http://localhost:3000/users/customerReviews');
         const customerReviews = response.data;
@@ -34,4 +32,4 @@ export async function getServerSideProps() {
     }
 }
 
-export default CustomerReviews;
+export default CustomerOrder;

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { useState, useEffect } from "react"
 
-function Support() {
+function AddVehicle() {
     const {
         register,
         handleSubmit,
@@ -31,10 +31,10 @@ function Support() {
     const onSubmit = async (data) => {
         console.log("came")
         try {
-            const response = await axios.post(`http://localhost:3000/users/${user.id}/support`, data);
+            const response = await axios.post(`http://localhost:3000/users/${user.id}/vehicles`, data);
             console.log('User created:', response.data);
 
-            setSuccess('successful');
+            setSuccess('vehicle added successfully');
             reset();
         } catch (error) {
             console.error('Error creating user:', error);
@@ -52,22 +52,40 @@ function Support() {
                         <tbody>
                             <tr>
                                 <td colSpan="2">
-                                    <h1 className='font-bold text-black text-xl'>Ask for support</h1>
+                                    <h1 className='font-bold text-black text-xl'>Add New Vehicle</h1>
                                     <p>{success}</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Support</label>
+                                    <label>Company</label>
                                 </td>
                                 <td>
-                                    <input type="text" {...register('support', { required: true })} />
-                                    {errors.support && <p>This field is required</p>}
+                                    <input type="text" {...register('company', { required: true })} />
+                                    {errors.company && <p>This field is required</p>}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Model</label>
+                                </td>
+                                <td>
+                                    <input type="text" {...register('model', { required: true })} />
+                                    {errors.model && <p>This field is required</p>}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Year</label>
+                                </td>
+                                <td>
+                                    <input type="number" {...register('year', { required: true })} />
+                                    {errors.year && <p>This field is required</p>}
                                 </td>
                             </tr>
                             <tr>
                                 <td colSpan="2">
-                                    <button type="submit">Submit</button>
+                                    <button type="submit">Add Vehicle</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -79,5 +97,15 @@ function Support() {
     );
 }
 
+// export async function getServerSideProps(context) {
 
-export default Support;
+   
+
+//     const response = await axios.get('http://localhost:3000/users/findUserByEmail',email);
+//     const user = await response.data;
+
+//     return { props: { user } }
+// }
+
+
+export default AddVehicle;

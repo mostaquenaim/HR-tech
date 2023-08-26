@@ -18,7 +18,8 @@ export default function DeliverymanSignIn() {
             console.log("skjbvs")
             const response = await axios.post('http://localhost:3000/users/signin', { email, password });
 
-            sessionStorage.setItem(email, response.data);
+            sessionStorage.setItem('email', email);
+            console.log(sessionStorage)
             router.push('productList');
 
             setSuccess('login successfully');

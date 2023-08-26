@@ -49,7 +49,7 @@ function Drawer(props) {
                     id="logo-sidebar"
                     className="fixed top-0 left-0 z-40 w-64 h-screen pt-10 transition-transform -translate-x-full bg-gray-900 border-r border-gray-800 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center"
                     aria-label="Sidebar"
-                >
+                > 
                     {/* Logo */}
                     <Link href="./dashboard">
                         <h1 className="text-white text-4xl font-bold mb-6">
