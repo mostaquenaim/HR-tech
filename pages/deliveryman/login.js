@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router';
 import LoggedCheck from '../components/loggedCheck';
+import MyHeader from '../components/header';
 
 
 export default function DeliverymanSignIn() {
@@ -21,7 +22,7 @@ export default function DeliverymanSignIn() {
 
             sessionStorage.setItem('email', email);
             console.log(sessionStorage)
-            router.push('productList');
+            router.push('updateProfile');
 
             setSuccess('login successfully');
             reset();
@@ -38,10 +39,10 @@ export default function DeliverymanSignIn() {
 
     return (
         <>
-
+<MyHeader title="Login"/>
             <LoggedCheck/>
             <section className="flex h-screen items-center justify-center text-center bg-gradient-to-b from-zinc-50 to-blue-100">
-                <div className='bg-white p-5 shadow-lg rounded-lg hover:shadow-2xl hover:shadow-black max-w-md w-full flex items-center justify-center text-center space-y-4'>
+                <div className='flex flex-col bg-white p-5 shadow-lg rounded-lg hover:shadow-2xl hover:shadow-black max-w-md w-full items-center justify-center text-center space-y-4'>
 
                     {/* Form start */}
                     <form onSubmit={handleSubmit} className="mx-auto">
@@ -90,6 +91,12 @@ export default function DeliverymanSignIn() {
                             </tbody>
                         </table>
                     </form>
+                    <p className="mt-4">
+                        Don't have an account?{' '}
+                        <a className="text-blue-500" href="/deliveryman/registration">
+                            Register here
+                        </a>
+                    </p>
                 </div>
             </section>
 

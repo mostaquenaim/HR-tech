@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { useState, useEffect } from "react"
 import SessionCheck from '@/pages/components/sessionCheck';
+import Drawer from '../components/drawer';
 
 function Feedback() {
     const {
@@ -21,7 +22,7 @@ function Feedback() {
         const UserEmail = sessionStorage.getItem('email')
         setEmail(UserEmail)
 
-        const result = await axios.get('http://localhost:3000/users/findUserByEmail', email);
+        const result = await axios.get(`http://localhost:3000/users/findUserByEmail/${UserEmail}`);
 
         setUser(result.data);
     };
@@ -44,6 +45,7 @@ function Feedback() {
 
     return (
         <>
+        <Drawer title="Feedback"/>
             <SessionCheck />
             <section className="text-gray-600 body-font">
                 <div className="container mx-auto bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">

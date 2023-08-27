@@ -2,25 +2,15 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import SessionCheck from '@/pages/components/sessionCheck';
+import Drawer from '@/pages/components/drawer';
 
 
-const UpdateSchedule = ({ schedule }) => {
+function UpdateSchedule ({ schedule }){
 
     const [updatedData, setUpdatedData] = useState({});
     const router = useRouter();
 
     const [success, setSuccess] = useState('')
-
-    const handleUpdate = async () => {
-        try {
-            console.log(updatedData)
-            await axios.put(`http://localhost:3000/users/updateSchedule/${schedule.id}`, updatedData);
-            setSuccess(' update successfully');
-        }
-        catch (error) {
-            setSuccess('Error updating user:', error);
-        }
-    };
 
     const handleDelete = async () => {
         try {
@@ -35,12 +25,6 @@ const UpdateSchedule = ({ schedule }) => {
     };
 
 
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setUpdatedData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
     return (
         <>
             <SessionCheck />
@@ -48,8 +32,10 @@ const UpdateSchedule = ({ schedule }) => {
                 <div className="p-5 bg-white shadow-md shadow-black w-96 flex flex-col gap-3 rounded-lg">
                     <h1 className="text-xl font-bold">Update Schedule</h1>
                     <p className="text-red-500">{success}</p>
+
                     <div className="my-2">
                         <label className="block font-semibold">Day:</label>
+                        {console.log("checkingggg", schedule)}
                         <p className="text-gray-700">{schedule.Day}</p>
                     </div>
                     <div className="my-2">
@@ -64,6 +50,7 @@ const UpdateSchedule = ({ schedule }) => {
                     </button>
                 </div>
             </div>
+
 
 
 
@@ -82,8 +69,9 @@ export async function getServerSideProps(context) {
 
     console.log(id);
 
-    const response = await axios.get('http://localhost:3000/users/schedule/' + id);
+    const response = await axios.get(`http://localhost:3000/users/getScheduleByID/${id}`);
     const schedule = await response.data;
+    console.log(schedule)
 
     return { props: { schedule } }
 }

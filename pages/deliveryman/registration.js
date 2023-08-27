@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import axios from "axios"
 import { useState } from "react"
 import SessionCheck from '@/pages/components/sessionCheck';
+import MyHeader from '../components/header';
 
 
 function CreateDeliveryman() {
@@ -28,7 +29,8 @@ function CreateDeliveryman() {
     return (
         <>
 
-            <SessionCheck/>
+        <MyHeader title="Registration"/>
+
             <section className="flex flex-col md:flex-row h-screen items-center text-center justify-evenly bg-gradient-to-b from-zinc-50 to-blue-100 gap-5">
                 <div>
                     <img className='' src='/deliverman.png' alt="Deliveryman" />
@@ -99,6 +101,12 @@ function CreateDeliveryman() {
                             </tbody>
                         </table>
                         </form>
+                        <p className="mt-4">
+                        Have an account?{' '}
+                        <a className="text-blue-500" href="/deliveryman/login">
+                            Login here
+                        </a>
+                    </p>
                 </div>
             </section>
         </>

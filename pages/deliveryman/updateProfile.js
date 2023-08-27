@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import SessionCheck from '../components/sessionCheck';
+import Drawer from '../components/drawer';
 
 const DeliverymanProfile = () => {
 
@@ -12,13 +13,7 @@ const DeliverymanProfile = () => {
         formState: { errors },
     } = useForm();
 
-    const [user, setUser] = useState({
-        username: "",
-        firstName: "",
-        email: "",
-        password: "",
-        lastName: "",
-    });
+    const [user, setUser] = useState({});
     const [email, setEmail] = useState("")
 
     useEffect(() => {
@@ -27,9 +22,10 @@ const DeliverymanProfile = () => {
 
     const loadUser = async () => {
         const UserEmail = sessionStorage.getItem('email')
+        console.log("email",)
         setEmail(UserEmail)
 
-        const result = await axios.get('http://localhost:3000/users/findUserByEmail', email);
+        const result = await axios.get(`http://localhost:3000/users/findUserByEmail/${UserEmail}`);
 
         setUser(result.data);
     };
@@ -41,6 +37,7 @@ const DeliverymanProfile = () => {
 
     const handleUpdate = async () => {
         try {
+            updatedData.email = user.email
             console.log(updatedData)
             await axios.put(`http://localhost:3000/users/update/${user.id}`, updatedData);
             setSuccess('Admin update successfully');
@@ -57,11 +54,26 @@ const DeliverymanProfile = () => {
 
     return (
         <>
+            <Drawer title="Update Profile" />
             <SessionCheck />
-            <div className="flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-screen">
+            <div className="flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-50 to-blue-100 h-full">
                 <div className="p-5 bg-white shadow-md shadow-black w-96 flex flex-col gap-3 rounded-lg">
                     <h1 className="text-xl font-bold">Update User</h1>
                     <p>{success}</p>
+                    <div className="my-2">
+                        {user.filename && (
+                            <img
+                                src={"http://localhost:3000/users/getImage/"+user.filename}
+                                alt="User Image"
+                                onError={(e) => {
+                                    console.error("Error loading image:", e);
+                                }}
+                            />
+                        )}
+                    </div>
+                    <div className="my-2">
+                        <button className='btn'><a href='changeImage'>change image</a>  </button>
+                    </div>
                     <div className="my-2">
                         <label className="block">First Name:</label>
                         <input
@@ -102,7 +114,7 @@ const DeliverymanProfile = () => {
                             className="border p-1 rounded focus:outline-none focus:border-blue-500"
                         />
                     </div>
-                    <div className="my-2">
+                    {/* <div className="my-2">
                         <label className="block">Email:</label>
                         <input
                             type="email"
@@ -111,7 +123,7 @@ const DeliverymanProfile = () => {
                             onChange={handleInputChange}
                             className="border p-1 rounded focus:outline-none focus:border-blue-500"
                         />
-                    </div>
+                    </div> */}
                     <button
                         onClick={handleUpdate}
                         className="btn bg-blue-400 text-black hover:text-white"

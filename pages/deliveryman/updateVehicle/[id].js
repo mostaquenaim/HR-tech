@@ -109,7 +109,7 @@ export async function getServerSideProps(context) {
 
     console.log(id);
 
-    const response = await axios.get('http://localhost:3000/users/vehicles/' + id);
+    const response = await axios.get('http://localhost:3000/users/getVehiclesById/' + id);
     const vehicle = await response.data;
 
     return { props: { vehicle } }

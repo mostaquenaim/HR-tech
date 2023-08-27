@@ -25,7 +25,7 @@ export default function ScheduleManagement() {
 
         setEmail(UserEmail)
 
-        const result = await axios.get('http://localhost:3000/users/schedule', email);
+        const result = await axios.get(`http://localhost:3000/users/schedule/${UserEmail}`);
 
         console.log(result.data);
         setUsers(result.data);
@@ -43,18 +43,25 @@ export default function ScheduleManagement() {
 
     return (
         <>
+            <Drawer title="Schedule Management" />
             <SessionCheck />
-            <section className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200">
+            <section className="bg-gradient-to-b from-zinc-50 to-blue-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 min-h-screen flex justify-center items-center">
                 <div className="container mx-auto">
-                    <div className="flex justify-center">
-                        <div className="mb-6">
-                            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Schedules</h1>
+                    <div className="flex justify-center mb-6">
+                        <div className="mb-6 text-center">
+                            <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
+                                Schedules
+                            </h1>
                             <div className="h-1 w-20 bg-indigo-500 rounded"></div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="flex flex-col items-center text-center justify-center md:grid-cols-2 lg:grid-cols-3 gap-6 text-black">
                         {users.map((user, index) => (
-                            <div key={user.id} className={`p-4 shadow-md hover:shadow-lg hover:shadow-black rounded-lg ${index % 2 === 0 ? 'bg-white' : 'bg-gray-200 dark:bg-gray-700'}`}>
+                            <div
+                                key={user.id}
+                                className={`p-4 shadow-md hover:shadow-lg hover:shadow-black rounded-lg ${index % 2 === 0 ? 'bg-white' : 'bg-gray-200 dark:bg-gray-700'
+                                    }`}
+                            >
                                 <div>
                                     <div>{/* Empty div for numbering */}</div>
                                     <h3 className="font-semibold">Day</h3>

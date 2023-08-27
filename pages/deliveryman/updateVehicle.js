@@ -25,7 +25,7 @@ export default function deliveryman() {
 
         setEmail(UserEmail)
 
-        const result = await axios.get('http://localhost:3000/users/vehicles', email);
+        const result = await axios.get(`http://localhost:3000/users/getVehiclesByEmail/${UserEmail}`);
         console.log(result.data);
         setUsers(result.data);
         console.log("usersss", users)
@@ -57,9 +57,10 @@ export default function deliveryman() {
 
     return (
         <>
+            <Drawer title="Update Vehicle" />
             <SessionCheck />
             <section className="bg-gradient-to-b from-zinc-50 to-blue-100 min-h-screen flex justify-center items-center">
-                <div className="container mx-auto bg-white shadow-md hover:shadow-lg hover:shadow-black p-6 rounded-lg">
+                <div className="container mx-auto bg-white shadow-md hover:shadow-lg hover:shadow-black p-6 rounded-lg w-64">
                     <div className="text-center mb-4">
                         <h1 className="font-bold text-xl">Vehicles</h1>
                     </div>
@@ -87,28 +88,7 @@ export default function deliveryman() {
 
 
 
+
         </>
     );
 }
-
-// export async function getServerSideProps({ query }) {
-//     const inputValue = query.inputValue;
-//     try {
-//         const response = await axios.get('https://nestjs-production-0acd.up.railway.app/admin/findcustomer/' + inputValue);
-//         const data = await response.data;
-
-//         return {
-//             props: {
-//                 data
-//             }
-//         };
-
-//     } catch (error) {
-
-//         return {
-//             props: {
-//                 data: { status: "enter valid customer id" }
-//             }
-//         };
-//     }
-// }
